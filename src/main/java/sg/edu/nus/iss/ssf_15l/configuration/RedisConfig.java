@@ -9,7 +9,7 @@ import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
-import sg.edu.nus.iss.ssf_15l.utilities.Util;
+import sg.edu.nus.iss.ssf_15l.utilities.Utility;
 
 
 @Configuration
@@ -38,14 +38,14 @@ public class RedisConfig {
         }
 
         JedisClientConfiguration jedisClient = JedisClientConfiguration.builder().build();
-        JedisConnectionFactory jedisFactory = new JedisConnectionFactory(rsc); // TODO: Are you supposed to pass in jedisClient here?
+        JedisConnectionFactory jedisFactory = new JedisConnectionFactory(rsc, jedisClient);
         jedisFactory.afterPropertiesSet();
 
         return jedisFactory;
         
     }
 
-    @Bean(Util.redisStringTemplate)
+    @Bean(Utility.REDIS_STRING_TEMPLATE)
     public RedisTemplate<String, String> redisStringTemplate() {
         RedisTemplate<String, String> template = new RedisTemplate<>();
         template.setConnectionFactory(jedisConnectionFactory());
@@ -54,7 +54,7 @@ public class RedisConfig {
         return template;
     }
 
-    @Bean(Util.redisObjectTemplate)
+    @Bean(Utility.REDIS_OBJECT_TEMPLATE)
     public RedisTemplate<String, Object> redisObjectTemplate() {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(jedisConnectionFactory());
