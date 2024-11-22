@@ -8,10 +8,9 @@ import sg.edu.nus.iss.ssf_15l.utilities.Utility;
 
 @Repository
 public class ValueRepository {
-    @Qualifier(Utility.REDIS_STRING_TEMPLATE)
     private final RedisTemplate<String, String> template;
 
-    public ValueRepository(RedisTemplate<String, String> template) {
+    public ValueRepository(@Qualifier(Utility.REDIS_STRING_TEMPLATE) RedisTemplate<String, String> template) {
         this.template = template;
     }
 

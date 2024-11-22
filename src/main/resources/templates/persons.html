@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSF Day 15 Lecture</title>
+</head>
+<body>
+    <h1>All persons</h1>
+    <a type="button" class="button" href="/persons/add">Add new</a>
+    <table>
+        <thead>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            <tr th:each="person : ${persons}">
+                <td th:text="${person.id}"></td>
+                <td th:text="${person.name}"></td>
+                <td th:text="${person.email}"></td>
+                <td>
+                    <a type="button" th:href="@{/persons/delete/{id}(id = ${person.id})}">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
